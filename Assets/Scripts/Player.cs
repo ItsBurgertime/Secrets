@@ -1,18 +1,31 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject poloPeer;
+    public bool isEnabled;
+    public AudioSource audioSource;
+    public AudioClip marcoCall;
+
+
+    private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TogglePeer();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void TogglePeer()
     {
-        
+        isEnabled = !isEnabled;
+        poloPeer.GetComponent<AudioSource>().enabled = isEnabled;
     }
 }
