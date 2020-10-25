@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4744754096235973449}
   - component: {fileID: 1337211593508007811}
   - component: {fileID: 238271694443487796}
-  - component: {fileID: 2083688715160871921}
   m_Layer: 8
   m_Name: LEye
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &2083688715160871921
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190425124121617157}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &2293141927034001482
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +388,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 8196137491563042305}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -419,6 +404,7 @@ GameObject:
   - component: {fileID: 8196137492218677446}
   - component: {fileID: 8196137492218677448}
   - component: {fileID: 1228409037088099723}
+  - component: {fileID: 5625813301688927021}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -482,7 +468,21 @@ MonoBehaviour:
   fleeSpeed: 12
   wanderMaterial: {fileID: 2100000, guid: d1d36a8850e275243a9dafb9f9576932, type: 2}
   fleeMaterial: {fileID: 2100000, guid: cc9bcacd0b13d4a45a8205843255534d, type: 2}
-  viewAngle: 180
+  viewAngle: 360
+  sfxDeath: {fileID: 8300000, guid: 4f8c10c20c528104b9a59542e8d2393e, type: 3}
+--- !u!135 &5625813301688927021
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196137492218677447}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8196137493009289268
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +573,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 8196137493009289268}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -632,7 +632,6 @@ GameObject:
   - component: {fileID: 5393818235301195732}
   - component: {fileID: 506760081667641294}
   - component: {fileID: 7055147717659324638}
-  - component: {fileID: 7623616004182474517}
   m_Layer: 8
   m_Name: REye
   m_TagString: Untagged
@@ -702,17 +701,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &7623616004182474517
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9182932444921713760}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

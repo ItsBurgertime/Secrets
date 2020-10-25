@@ -7,6 +7,8 @@ using UnityEngine.AI;
  * When enabled, the enemy will flee from the player
  */
 
+#pragma warning disable 0649,0414
+
 enum EnemyState { Init, Wandering, Fleeing, Birthing, PrayingToTheElderGhods };
 
 public class EnemyAI : MonoBehaviour
@@ -29,11 +31,12 @@ public class EnemyAI : MonoBehaviour
     Transform visionPoint;
 
     Vector3 goal;
-    Transform player = default;
-    NavMeshAgent navMeshAgent = default;
-    EnemyState state = default;
-    private NavMeshPath navMeshPath;
-
+    Transform player;
+    NavMeshAgent navMeshAgent;
+    EnemyState state;
+    NavMeshPath navMeshPath;
+    AudioSource audioSource;
+    [SerializeField] AudioClip sfxDeath;
 
 
     void Awake()
@@ -48,6 +51,7 @@ public class EnemyAI : MonoBehaviour
         visionPoint        = transform.Find("RepositionBase/VisionPoint").transform;
         fleeMaterials[0]   = fleeMaterial;                            // HACK - these should be static
         wanderMaterials[0] = wanderMaterial;
+        audioSource = player.gameObject.GetComponent<AudioSource>();  // HACKY
 }
 
 
@@ -131,8 +135,6 @@ public class EnemyAI : MonoBehaviour
 
     void Flee(bool isContinuation = false)
     {
-        Debug.Log("Flee");
-
         state = EnemyState.Fleeing;
         SetStateAppearance();
 
@@ -182,5 +184,14 @@ public class EnemyAI : MonoBehaviour
         Material[] mats = state == EnemyState.Wandering ? wanderMaterials : fleeMaterials;
         leftMeshRenderer.materials = mats;
         rightMeshRenderer.materials = mats;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            audioSource.PlayOneShot(sfxDeath);
+            Destroy(gameObject);
+        }
     }
 }
