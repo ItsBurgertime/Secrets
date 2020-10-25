@@ -25,10 +25,8 @@ public class SoundEffectCollider : MonoBehaviour
         if (other.tag == "Player")
         {
             int rnd = Random.Range(0, 100);
-            Debug.Log(rnd);
             if (soundChance >= rnd)
             {
-                Debug.Log("played sound");
                 src.PlayOneShot(soundEffects[Random.Range(0, soundEffects.Length)]);
             }
         }

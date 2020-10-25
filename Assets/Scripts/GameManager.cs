@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
                     currentGameState = GameState.GameOver;
                     timeRemaining = 0;
                     timerIsRunning = false;
+
+                    StartCoroutine(RestartGame());
                 }
             }
         }
@@ -112,8 +114,6 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.Mainmenu;
 
-        Cursor.lockState = CursorLockMode.None;
-
         SceneManager.UnloadSceneAsync(currentSceneName);
 
         enemyAmount = 0;
@@ -121,6 +121,16 @@ public class GameManager : MonoBehaviour
         timeRemaining = 30;
         isPlayerSpawned = false;
         isEnemySpawned = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(3f);
+
+        BackToMainMenu();
     }
 
     private void WinGame()
@@ -130,6 +140,8 @@ public class GameManager : MonoBehaviour
             if (enemyAmount != 0 && playerScore >= enemyAmount)
             {
                 currentGameState = GameState.Win;
+
+                StartCoroutine(RestartGame());
             }
         }
     }
