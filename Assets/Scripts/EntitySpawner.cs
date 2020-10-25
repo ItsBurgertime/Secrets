@@ -43,6 +43,7 @@ public class EntitySpawner : MonoBehaviour
                 if(GameManager.Instance.isEnemySpawned == false)
                 {
                     SpawnEntity(GameManager.Instance.enemyPrefab, entitySpawnpoints[i].transform);
+                    GameManager.Instance.enemyAmount++;
                 }
             }
         }

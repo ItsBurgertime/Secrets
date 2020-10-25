@@ -7,6 +7,9 @@ public class MenuHandler : MonoBehaviour
     public GameObject mainCamera;
     public GameObject mainMenu;
     public GameObject pauseMenu;
+    public GameObject playerHUD;
+    public GameObject winPanel;
+    public GameObject gameOverPanel;
 
     private void Update()
     {
@@ -20,6 +23,33 @@ public class MenuHandler : MonoBehaviour
         {
             mainMenu.SetActive(false);
             mainCamera.SetActive(false);
+        }
+
+        if(GameManager.Instance.currentGameState == GameState.Playing)
+        {
+            playerHUD.SetActive(true);
+        }
+        else
+        {
+            playerHUD.SetActive(false);
+        }
+
+        if (GameManager.Instance.currentGameState == GameState.Win)
+        {
+            winPanel.SetActive(true);
+        }
+        else
+        {
+            winPanel.SetActive(false);
+        }
+
+        if (GameManager.Instance.currentGameState == GameState.GameOver)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        else
+        {
+            gameOverPanel.SetActive(false);
         }
 
         if (GameManager.Instance.currentGameState == GameState.Paused)

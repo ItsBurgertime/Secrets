@@ -25,16 +25,21 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public bool isPlayerSpawned;
 
+    public int playerScore = 0;
+    public float playerTime = 30f;
 
     [Header("Enemy")]
     public GameObject enemyPrefab;
     public bool isEnemySpawned;
-
-    private EntitySpawner entitySpawner;
+    public int enemyAmount;
 
 
     [Header("Scenes")]
     private string currentSceneName;
+
+    [Header("Timer")]
+    public float timeRemaining = 30f;
+    public bool timerIsRunning = false;
 
 
     private void Awake()
@@ -53,6 +58,31 @@ public class GameManager : MonoBehaviour
             Debug.Log("Application closing");
             Application.Quit();
         }
+
+        WinGame();
+    }
+
+    void Timer()
+    {
+        if(timerIsRunning)
+        {
+            if(timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                Debug.Log("Timer has run out of time");
+                currentGameState = GameState.GameOver;
+                timeRemaining = 0;
+                timerIsRunning = false;
+            }
+        }
+    }
+
+    public void AddScore(int score)
+    {
+        playerScore += score;
     }
 
     #region GameStates
@@ -81,8 +111,20 @@ public class GameManager : MonoBehaviour
 
         SceneManager.UnloadSceneAsync(currentSceneName);
 
-        GameManager.Instance.isPlayerSpawned = false;
-        GameManager.Instance.isEnemySpawned = false;
+        enemyAmount = 0;
+        isPlayerSpawned = false;
+        isEnemySpawned = false;
+    }
+
+    private void WinGame()
+    {
+        if(currentGameState == GameState.Playing)
+        {
+            if (enemyAmount != 0 && playerScore >= enemyAmount)
+            {
+                currentGameState = GameState.Win;
+            }
+        }
     }
 
     #endregion
