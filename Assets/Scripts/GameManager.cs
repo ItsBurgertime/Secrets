@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("Scenes")]
-    private string currentSceneName;
+    public string currentSceneName;
 
 
     private void Awake()
@@ -54,13 +54,13 @@ public class GameManager : MonoBehaviour
 
     public void StartScene(string sceneName)
     {
-        currentGameState = GameState.Playing;
-
         //for now this just starts the hard coded scene
         currentSceneName = sceneName;
 
         //loading scene additively to keep the menu and game manager
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        currentGameState = GameState.Playing;
     }
 
     public void PauseGame()
@@ -71,17 +71,10 @@ public class GameManager : MonoBehaviour
     public void BackToMainMenu()
     {
         currentGameState = GameState.Mainmenu;
-        Application.Quit();
-        /*
-        if (entitySpawner == null)
-        {
-            entitySpawner = FindObjectOfType<EntitySpawner>();
-            entitySpawner.RemoveEntities();
-        }
+
+        Cursor.lockState = CursorLockMode.None;
 
         SceneManager.UnloadSceneAsync(currentSceneName);
-        SceneManager.LoadScene("MainMenu");
-        */
     }
 
     #endregion

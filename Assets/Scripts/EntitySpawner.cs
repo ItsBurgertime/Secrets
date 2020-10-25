@@ -57,6 +57,7 @@ public class EntitySpawner : MonoBehaviour
     public void SpawnEntity(GameObject entityPrefab, Transform transform)
     {
         spawnedEntity = Instantiate(entityPrefab, transform.position, Quaternion.identity);
+        spawnedEntity.transform.parent = this.transform;
         //entityList.Add(spawnedEntity);
         spawnedEntity = null;
     }
