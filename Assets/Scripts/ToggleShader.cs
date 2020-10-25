@@ -7,10 +7,13 @@ public class ToggleShader : MonoBehaviour
 
     public bool isEnabled = false;
 
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
             Toggle();
+
     }
 
     public void Toggle()
