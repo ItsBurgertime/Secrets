@@ -128,6 +128,7 @@ public class EnemyAI : MonoBehaviour
     void Flee(bool isContinuation = false)
     {
         Debug.Log("Flee");
+
         state = EnemyState.Fleeing;
         SetStateAppearance();
 
@@ -177,8 +178,5 @@ public class EnemyAI : MonoBehaviour
         Material[] mats = state == EnemyState.Wandering ? wanderMaterials : fleeMaterials;
         leftMeshRenderer.materials = mats;
         rightMeshRenderer.materials = mats;
-        if (state == EnemyState.Fleeing)
-            Debug.Break();
-
     }
 }
