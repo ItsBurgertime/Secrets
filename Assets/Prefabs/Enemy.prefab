@@ -199,8 +199,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8196137491563042304}
   - {fileID: 8196137493009289271}
+  - {fileID: 8196137491563042304}
   - {fileID: 4744754096235973449}
   - {fileID: 5393818235301195732}
   - {fileID: 3991925694552518622}
@@ -330,7 +330,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7188500501093998339}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8196137491563042308
 MeshFilter:
@@ -469,6 +469,7 @@ MonoBehaviour:
   wanderMaterial: {fileID: 2100000, guid: d1d36a8850e275243a9dafb9f9576932, type: 2}
   fleeMaterial: {fileID: 2100000, guid: cc9bcacd0b13d4a45a8205843255534d, type: 2}
   viewAngle: 360
+  player: {fileID: 0}
   sfxDeath: {fileID: 8300000, guid: 4f8c10c20c528104b9a59542e8d2393e, type: 3}
 --- !u!135 &5625813301688927021
 SphereCollider:
@@ -512,10 +513,10 @@ Transform:
   m_GameObject: {fileID: 8196137493009289268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7188500501093998339}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8196137493009289272
 MeshFilter:
@@ -532,7 +533,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196137493009289268}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
