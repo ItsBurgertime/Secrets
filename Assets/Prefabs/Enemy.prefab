@@ -469,6 +469,7 @@ MonoBehaviour:
   wanderMaterial: {fileID: 2100000, guid: d1d36a8850e275243a9dafb9f9576932, type: 2}
   fleeMaterial: {fileID: 2100000, guid: cc9bcacd0b13d4a45a8205843255534d, type: 2}
   viewAngle: 360
+  player: {fileID: 0}
   sfxDeath: {fileID: 8300000, guid: 4f8c10c20c528104b9a59542e8d2393e, type: 3}
 --- !u!135 &5625813301688927021
 SphereCollider:
@@ -478,7 +479,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196137492218677447}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
