@@ -117,9 +117,9 @@ public class EnemyAI : MonoBehaviour
 
         NavMeshHit navHit;
 
-        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
-
-        return navHit.position;
+        return NavMesh.SamplePosition(randDirection, out navHit, dist, layermask) ?
+            navHit.position :
+            origin;
     }
 
 
