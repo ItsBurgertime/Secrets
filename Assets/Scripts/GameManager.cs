@@ -91,6 +91,14 @@ public class GameManager : MonoBehaviour
         playerScore += score;
     }
 
+    public void AddTime(int timeToAdd)
+    {
+        if(timeRemaining != 0)
+        {
+            timeRemaining += timeToAdd;
+        }
+    }
+
     #region GameStates
 
     public void StartScene(string sceneName)

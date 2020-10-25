@@ -200,6 +200,7 @@ public class EnemyAI : MonoBehaviour
         {
             audioSource.PlayOneShot(sfxDeath);
             GameManager.Instance.AddScore(1);
+            GameManager.Instance.AddTime(5);
             Destroy(gameObject);
         }
     }
