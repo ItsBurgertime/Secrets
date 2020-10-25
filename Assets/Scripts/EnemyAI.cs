@@ -18,9 +18,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float fleeSpeed = 5f;
     [SerializeField] Material wanderMaterial;
     [SerializeField] Material fleeMaterial;
-    Material[] LEye, REye;
-    Material[] wanderMaterials = new Material[1];
-    Material[] fleeMaterials = new Material[1];
+    public MeshRenderer leftMeshRenderer, rightMeshRenderer;
+    public Material[] wanderMaterials = new Material[1];
+    public Material[] fleeMaterials = new Material[1];
     [SerializeField] bool vision360 = false;
     float navigationExpire = float.MinValue;
 
@@ -42,9 +42,9 @@ public class EnemyAI : MonoBehaviour
 
         state = EnemyState.Wandering;
         navMeshPath = new NavMeshPath();
-        LEye = transform.Find("RepositionBase/LEye").GetComponent<MeshRenderer>().materials;
-        REye = transform.Find("RepositionBase/REye").GetComponent<MeshRenderer>().materials;
-        fleeMaterials[0] = fleeMaterial;
+        leftMeshRenderer = transform.Find("RepositionBase/LEye").GetComponent<MeshRenderer>();
+        rightMeshRenderer = transform.Find("RepositionBase/REye").GetComponent<MeshRenderer>();
+        fleeMaterials[0] = fleeMaterial;                            // HACK - these should be static
         wanderMaterials[0] = wanderMaterial;
 }
 
@@ -93,7 +93,7 @@ public class EnemyAI : MonoBehaviour
         Debug.Log("tPoint: " + transform.position);
         Debug.Log("fPoint: " + transform.forward);
         //Debug.Break();
-        Debug.DrawRay(transform.position + sourcePoint, player.position, Color.green);
+        //Debug.DrawRay(transform.position + sourcePoint, player.position, Color.green);
 
         return Physics.Linecast(transform.position + sourcePoint, player.position, out hit) && hit.transform.tag == "Player";
     }
@@ -175,7 +175,10 @@ public class EnemyAI : MonoBehaviour
     void SetStateAppearance()
     {
         Material[] mats = state == EnemyState.Wandering ? wanderMaterials : fleeMaterials;
-        LEye = mats;
-        REye = mats;
+        leftMeshRenderer.materials = mats;
+        rightMeshRenderer.materials = mats;
+        if (state == EnemyState.Fleeing)
+            Debug.Break();
+
     }
 }
