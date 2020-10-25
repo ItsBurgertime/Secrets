@@ -16,7 +16,7 @@ public class ToggleShader : MonoBehaviour
     public void Toggle()
     {
         isEnabled = !isEnabled;
-        Debug.Log("Polo response: " + (isEnabled ? "ON" : "OFF"));
+        //Debug.Log("Polo response: " + (isEnabled ? "ON" : "OFF"));
         foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
             gameObject.GetComponent<MeshRenderer>().enabled = isEnabled;
     }

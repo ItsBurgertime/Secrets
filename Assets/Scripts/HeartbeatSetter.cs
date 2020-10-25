@@ -35,7 +35,7 @@ public class HeartbeatSetter : MonoBehaviour
             sum += audiopeer.samples[i];
         }
 
-        Debug.Log(sum);
+        //Debug.Log(sum);
         shaderMat.SetFloat("Vector1_9D18033A", sum );
 
 
