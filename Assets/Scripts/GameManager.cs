@@ -71,13 +71,17 @@ public class GameManager : MonoBehaviour
     public void BackToMainMenu()
     {
         currentGameState = GameState.Mainmenu;
-        SceneManager.UnloadSceneAsync(currentSceneName);
-
-        if(entitySpawner == null)
+        Application.Quit();
+        /*
+        if (entitySpawner == null)
         {
             entitySpawner = FindObjectOfType<EntitySpawner>();
             entitySpawner.RemoveEntities();
         }
+
+        SceneManager.UnloadSceneAsync(currentSceneName);
+        SceneManager.LoadScene("MainMenu");
+        */
     }
 
     #endregion

@@ -31,6 +31,7 @@ public class EntitySpawner : MonoBehaviour
             {
                 if(GameManager.Instance.isPlayerSpawned == false)
                 {
+                    Debug.Log("Player spawned");
                     GameManager.Instance.isPlayerSpawned = true;
                     SpawnEntity(GameManager.Instance.playerPrefab, entitySpawnpoints[i].transform);
                 }
