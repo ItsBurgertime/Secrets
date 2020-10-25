@@ -18,11 +18,15 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float fleeSpeed = 5f;
     [SerializeField] Material wanderMaterial;
     [SerializeField] Material fleeMaterial;
-    public MeshRenderer leftMeshRenderer, rightMeshRenderer;
-    public Material[] wanderMaterials = new Material[1];
-    public Material[] fleeMaterials = new Material[1];
-    [SerializeField] bool vision360 = false;
+    Material[] wanderMaterials = new Material[1];
+    Material[] fleeMaterials = new Material[1];
+
+    [Tooltip("View cone in front of enemy. set to 360 to have eyes in the back of his head")]
+    [SerializeField] float viewAngle = 360f;
+
+    MeshRenderer leftMeshRenderer, rightMeshRenderer;
     float navigationExpire = float.MinValue;
+    Transform visionPoint;
 
     Vector3 goal;
     Transform player = default;
@@ -30,9 +34,6 @@ public class EnemyAI : MonoBehaviour
     EnemyState state = default;
     private NavMeshPath navMeshPath;
 
-    // DEBUG
-    Vector3 myPos;
-    Vector3 dbgPlayerPos;
 
 
     void Awake()
@@ -42,9 +43,10 @@ public class EnemyAI : MonoBehaviour
 
         state = EnemyState.Wandering;
         navMeshPath = new NavMeshPath();
-        leftMeshRenderer = transform.Find("RepositionBase/LEye").GetComponent<MeshRenderer>();
-        rightMeshRenderer = transform.Find("RepositionBase/REye").GetComponent<MeshRenderer>();
-        fleeMaterials[0] = fleeMaterial;                            // HACK - these should be static
+        leftMeshRenderer   = transform.Find("RepositionBase/LEye").GetComponent<MeshRenderer>();
+        rightMeshRenderer  = transform.Find("RepositionBase/REye").GetComponent<MeshRenderer>();
+        visionPoint        = transform.Find("RepositionBase/VisionPoint").transform;
+        fleeMaterials[0]   = fleeMaterial;                            // HACK - these should be static
         wanderMaterials[0] = wanderMaterial;
 }
 
@@ -88,14 +90,16 @@ public class EnemyAI : MonoBehaviour
     bool CanSeePlayer()
     {
         RaycastHit hit;
-        Vector3 sourcePoint = vision360 ? transform.up : transform.forward;
-        Debug.Log("sourcePoint: " + sourcePoint);
-        Debug.Log("tPoint: " + transform.position);
-        Debug.Log("fPoint: " + transform.forward);
-        //Debug.Break();
-        //Debug.DrawRay(transform.position + sourcePoint, player.position, Color.green);
+        Vector3 playerDir = player.position - transform.position;
+        
+        // The angle returned is the unsigned angle between the two vectors.
+        // This means the smaller of the two possible angles between the two vectors is used.
+        // The result is never greater than 180 degrees.
 
-        return Physics.Linecast(transform.position + sourcePoint, player.position, out hit) && hit.transform.tag == "Player";
+        float angle = Vector3.Angle(transform.forward, playerDir) * 2;
+
+        Debug.DrawLine(visionPoint.position, player.position, Color.green);
+        return angle < viewAngle && Physics.Linecast(visionPoint.position, player.position, out hit) && hit.transform.tag == "Player";
     }
 
     void Wander()
@@ -155,6 +159,9 @@ public class EnemyAI : MonoBehaviour
     {
         float currentDistanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+        if (Vector3.Distance(goal, player.position) < currentDistanceToPlayer)
+            return false;
+
         for (int i = 0; i < navMeshPath.corners.Length; i++)
             if (Vector3.Distance(navMeshPath.corners[i], player.position) < currentDistanceToPlayer)
                 return false;
@@ -165,11 +172,8 @@ public class EnemyAI : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(goal, 0.5f);
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(myPos, 0.5f);
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(dbgPlayerPos, 0.5f);
+        Gizmos.DrawSphere(goal, 0.25f);
+
     }
 
 
