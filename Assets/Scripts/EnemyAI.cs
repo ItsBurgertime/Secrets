@@ -191,6 +191,7 @@ public class EnemyAI : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             audioSource.PlayOneShot(sfxDeath);
+            InGameManager.instance.AddScore(1);
             Destroy(gameObject);
         }
     }
