@@ -1088,7 +1088,7 @@ MonoBehaviour:
   panelGameOver: {fileID: 1397650912}
   panelWin: {fileID: 358569488}
   panelHud: {fileID: 1401391495}
-  sceneDuration: 44
+  sceneDuration: 30
 --- !u!4 &105462848
 Transform:
   m_ObjectHideFlags: 0
