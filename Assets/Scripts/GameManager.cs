@@ -60,22 +60,26 @@ public class GameManager : MonoBehaviour
         }
 
         WinGame();
+        Timer();
     }
 
     void Timer()
     {
-        if(timerIsRunning)
+        if(currentGameState == GameState.Playing)
         {
-            if(timeRemaining > 0)
+            if (timerIsRunning)
             {
-                timeRemaining -= Time.deltaTime;
-            }
-            else
-            {
-                Debug.Log("Timer has run out of time");
-                currentGameState = GameState.GameOver;
-                timeRemaining = 0;
-                timerIsRunning = false;
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                }
+                else
+                {
+                    Debug.Log("Timer has run out of time");
+                    currentGameState = GameState.GameOver;
+                    timeRemaining = 0;
+                    timerIsRunning = false;
+                }
             }
         }
     }
@@ -96,6 +100,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
         currentGameState = GameState.Playing;
+        timerIsRunning = true;
     }
 
     public void PauseGame()
@@ -112,6 +117,8 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(currentSceneName);
 
         enemyAmount = 0;
+        playerScore = 0;
+        timeRemaining = 30;
         isPlayerSpawned = false;
         isEnemySpawned = false;
     }
