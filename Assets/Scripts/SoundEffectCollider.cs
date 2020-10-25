@@ -29,7 +29,7 @@ public class SoundEffectCollider : MonoBehaviour
             if (soundChance >= rnd)
             {
                 Debug.Log("played sound");
-                //src.PlayOneShot(soundEffects[0]);
+                src.PlayOneShot(soundEffects[Random.Range(0, soundEffects.Length)]);
             }
         }
     }
