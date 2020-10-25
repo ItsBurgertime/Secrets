@@ -30,9 +30,10 @@ public class GameManager : MonoBehaviour
     public GameObject enemyPrefab;
     public bool isEnemySpawned;
 
+    private EntitySpawner entitySpawner;
+
 
     [Header("Scenes")]
-    public string[] sceneNameArray;
     private string currentSceneName;
 
 
@@ -51,15 +52,15 @@ public class GameManager : MonoBehaviour
 
     #region GameStates
 
-    public void StartGame()
+    public void StartScene(string sceneName)
     {
         currentGameState = GameState.Playing;
 
         //for now this just starts the hard coded scene
-        currentSceneName = sceneNameArray[0];
+        currentSceneName = sceneName;
 
         //loading scene additively to keep the menu and game manager
-        SceneManager.LoadSceneAsync(sceneNameArray[0], LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
     }
 
     public void PauseGame()
@@ -71,6 +72,12 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.Mainmenu;
         SceneManager.UnloadSceneAsync(currentSceneName);
+
+        if(entitySpawner == null)
+        {
+            entitySpawner = FindObjectOfType<EntitySpawner>();
+            entitySpawner.RemoveEntities();
+        }
     }
 
     #endregion

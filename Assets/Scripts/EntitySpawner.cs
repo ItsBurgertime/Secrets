@@ -5,6 +5,9 @@ using UnityEngine;
 public class EntitySpawner : MonoBehaviour
 {
     private Spawnpoint[] entitySpawnpoints;
+
+    private GameObject spawnedEntity;
+    private List<GameObject> entityList;
     private int enemySpawnerCount;
 
 
@@ -44,7 +47,7 @@ public class EntitySpawner : MonoBehaviour
         }
 
         //limiting enemy spawns so it wont spawn millions LOL
-        if(enemySpawnerCount >= entitySpawnpoints.Length -1)
+        if(enemySpawnerCount >= entitySpawnpoints.Length -1) //-1 so it doesn't spawn twice for some reason
         {
             GameManager.Instance.isEnemySpawned = true;
         }
@@ -52,7 +55,21 @@ public class EntitySpawner : MonoBehaviour
 
     public void SpawnEntity(GameObject entityPrefab, Transform transform)
     {
-        Instantiate(entityPrefab, transform.position, Quaternion.identity);
+        spawnedEntity = Instantiate(entityPrefab, transform.position, Quaternion.identity);
+        //entityList.Add(spawnedEntity);
+        spawnedEntity = null;
     }
 
+    public void RemoveEntities()
+    {
+        GameManager.Instance.isEnemySpawned = false;
+        GameManager.Instance.isPlayerSpawned = false;
+
+        //delete every object in list
+        foreach(GameObject entity in entityList)
+        {
+            Destroy(entity);
+        }
+        entityList.Clear();
+    }
 }
