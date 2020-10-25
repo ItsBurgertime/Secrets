@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 163bde22f06feab4586920abb1c7a1b9
+  - enabled: 1
+    path: Assets/Scenes/Testmap1_dvrk.unity
+    guid: 260e4bae81ad9ca4995e123d819db350
   m_configObjects: {}

@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
     Transform visionPoint;
 
     Vector3 goal;
-    Transform player;
+    public Transform player;
     NavMeshAgent navMeshAgent;
     EnemyState state;
     NavMeshPath navMeshPath;
@@ -41,7 +41,7 @@ public class EnemyAI : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         state = EnemyState.Wandering;
@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
         visionPoint        = transform.Find("RepositionBase/VisionPoint").transform;
         fleeMaterials[0]   = fleeMaterial;                            // HACK - these should be static
         wanderMaterials[0] = wanderMaterial;
-        audioSource = player.gameObject.GetComponent<AudioSource>();  // HACKY
+        //audioSource = player.gameObject.GetComponent<AudioSource>();  // HACKY
 }
 
 
@@ -59,6 +59,14 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //finding the player objects when the player is spawned
+        if(player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            audioSource = player.gameObject.GetComponent<AudioSource>();
+        }
+
+
         if (state == EnemyState.Wandering)
         {
             if (CanSeePlayer())

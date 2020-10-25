@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("Scenes")]
-    public string currentSceneName;
+    private string currentSceneName;
 
 
     private void Awake()
@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape) && currentGameState != GameState.Mainmenu)
         {
             BackToMainMenu();
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape) && currentGameState == GameState.Mainmenu)
+        {
+            Debug.Log("Application closing");
+            Application.Quit();
         }
     }
 
@@ -75,6 +80,30 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
 
         SceneManager.UnloadSceneAsync(currentSceneName);
+
+        GameManager.Instance.isPlayerSpawned = false;
+        GameManager.Instance.isEnemySpawned = false;
+    }
+
+    #endregion
+
+
+
+    #region Scene Loading
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     #endregion
