@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testmap1.unity
     guid: 82c1efe2dff8ba9469f12e81584d7ccb
-  - enabled: 0
-    path: Assets/Scenes/Testmap1_dvrk.unity
-    guid: 260e4bae81ad9ca4995e123d819db350
+  - enabled: 1
+    path: Assets/Scenes/Testmap1_jimuUpdated.unity
+    guid: b2369b6e6e0c646499eb80f1bd62c391
   m_configObjects: {}
