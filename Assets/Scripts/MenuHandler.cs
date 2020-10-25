@@ -17,12 +17,12 @@ public class MenuHandler : MonoBehaviour
         if (GameManager.Instance.currentGameState == GameState.Mainmenu)
         {
             mainMenu.SetActive(true);
-            mainCamera.SetActive(true);
+            mainCamera.GetComponent<AudioListener>().enabled = true;
         }
         else
         {
             mainMenu.SetActive(false);
-            mainCamera.SetActive(false);
+            mainCamera.GetComponent<AudioListener>().enabled = false;
         }
 
         if(GameManager.Instance.currentGameState == GameState.Playing)
