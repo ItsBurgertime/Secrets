@@ -5525,6 +5525,7 @@ GameObject:
   - component: {fileID: 5798708250502920968}
   - component: {fileID: 5798708250502920971}
   - component: {fileID: 5798708250502920980}
+  - component: {fileID: 8296985819766683643}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Player
@@ -5700,6 +5701,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &8296985819766683643
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5798708250502920975}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5798708250999935071
 GameObject:
   m_ObjectHideFlags: 0
